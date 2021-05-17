@@ -28,13 +28,17 @@ const App = (props) => {
             alert('No Chat ID found!');
             return;
           }
+
           const IDs = [];
-          for (let id of data.result) {
-            if (id.my_chat_member) {
-              IDs.push({
-                id: id.my_chat_member.chat.id,
-                title: id.my_chat_member.chat.title
-              });
+
+          for (let chat of data.result) {
+            if (chat.my_chat_member) {
+              if (IDs.length === 0 || IDs.findIndex(c => c.id === chat.my_chat_member.chat.id) === -1) {
+                IDs.push({
+                  id: chat.my_chat_member.chat.id,
+                  title: chat.my_chat_member.chat.title
+                });
+              }
             }
           }
           setTelegramChatIDs(IDs);
@@ -73,7 +77,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h2>TokenPlay Telegram Bot</h2>
+      <h2>Telegram Bot</h2>
       <div>
         <label>Telegram Bot Token: </label>
         <input
