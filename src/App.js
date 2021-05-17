@@ -48,7 +48,7 @@ const App = (props) => {
   };
 
   const sendMessage = async () => {
-    if (message && telegramChatIDs && telegramChatIDs.length > 0) {
+    if (message && telegramBotToken && telegramChatIDs && telegramChatIDs.length > 0) {
       for (let chat of telegramChatIDs) {
         await axios
           .get(
@@ -97,8 +97,8 @@ const App = (props) => {
       <label>Message: </label>
       <br/>
       <textarea
-        rows="5"
-        cols="40"
+        rows="20"
+        cols="100"
         value={message}
         onChange={handleMessageChange}
       />
